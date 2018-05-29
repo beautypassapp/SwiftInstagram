@@ -80,4 +80,8 @@ extension Instagram {
 
         request("/users/search", parameters: parameters, success: { data in success?(data!) }, failure: failure)
     }
+    
+    public func me(success: SuccessHandler<InstagramUser>?, failure: FailureHandler?) {
+        request("/users/self", parameters: Parameters(), success: { data in success?(data!) }, failure: failure)
+    }
 }

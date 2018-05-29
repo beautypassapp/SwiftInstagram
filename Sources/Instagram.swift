@@ -66,7 +66,6 @@ public class Instagram {
     /// - parameter success: The callback called after a correct login.
     /// - parameter failure: The callback called after an incorrect login.
     public func login(withScopes scopes: [InstagramScope] = [.basic],
-                      config: [String: Any]? = nil,
                       success: EmptySuccessHandler?,
                       failure: FailureHandler? ) -> UINavigationController? {
         guard client != nil else {
@@ -75,9 +74,7 @@ public class Instagram {
         }
         let authURL = buildAuthURL(scopes: scopes)
         let loginViewController = InstagramLoginViewController(authURL: authURL, success: nil, failure: nil)
-        if let progressColor = config?["progressColor"] as? UIColor {
-            loginViewController.progressColor = progressColor
-        }
+        loginViewController.progressColor = UIColor.blue
         loginViewController.success = { accessToken in
             guard self.storeAccessToken(accessToken) else {
                 failure?(InstagramError.keychainError(code: self.keychain.lastResultCode))
